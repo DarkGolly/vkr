@@ -9,6 +9,7 @@ def handle_post_request():
     if request.content_type == 'text/plain':
         data = request.get_data(as_text=True)
         # process the data
+        print(data)
         return f'The data you sent was: {data}'
     else:
         return 'Unsupported Media Type', 415
