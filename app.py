@@ -5,10 +5,13 @@ app = Flask(__name__)
 app = Flask(__name__)
 
 @app.route('/post-handler', methods=['POST'])
-def post_handler():
-    data = request.form['value']
-    print(data[0])
-    return 'Запрос успешно обработан'
+def handle_post_request():
+    if request.content_type == 'text/plain':
+        data = request.get_data(as_text=True)
+        # process the data
+        return f'The data you sent was: {data}'
+    else:
+        return 'Unsupported Media Type', 415
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
