@@ -1,4 +1,5 @@
 from flask import Flask, request
+from pyais import decode
 app = Flask(__name__)
 
 @app.route('/post-handler', methods=['POST'])
@@ -7,6 +8,8 @@ def handle_post_request():
         data = request.get_data(as_text=True)
         # process the data
         print(data)
+        print("--------------------")
+        print(decode(data))
         return f'The data you sent was: {data}'
     else:
         return 'Unsupported Media Type', 415
