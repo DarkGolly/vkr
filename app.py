@@ -7,7 +7,7 @@ app = Flask(__name__)
 @app.route('/post-handler', methods=['POST'])
 def post_handler():
     data = request.form['value']
-    # Обработка данных
+    print(data[0])
     return 'Запрос успешно обработан'
 
 if __name__ == '__main__':
