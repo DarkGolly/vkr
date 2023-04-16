@@ -1,22 +1,18 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 app = Flask(__name__)
 
 
-@app.route('/', methods=['POST'])
-def process_post_request():
-    if request.method == 'POST':
-        data = request.form['data']
-        # обрабатываем полученные данные
-        return f'Received data: {data}'
+app = Flask(__name__)
 
-@app.route('/main')
-def main():  # put application's code here
-    return 'Workplace!'
-
+@app.route('/post-handler', methods=['POST'])
+def post_handler():
+    data = request.form['value']
+    # Обработка данных
+    return 'Запрос успешно обработан'
 
 if __name__ == '__main__':
-    #MyServer.server_program()
-    app.run(host="0.0.0.0")
+    app.run(host='0.0.0.0', debug=True)
+
 
 
 
