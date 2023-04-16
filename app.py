@@ -1,7 +1,4 @@
-from flask import Flask, request, render_template
-app = Flask(__name__)
-
-
+from flask import Flask, request
 app = Flask(__name__)
 
 @app.route('/post-handler', methods=['POST'])
@@ -16,7 +13,3 @@ def handle_post_request():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
-
-
-
-
