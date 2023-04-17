@@ -8,9 +8,8 @@ def handle_post_request():
         data = request.get_data(as_text=True)
         # process the data
         print(data)
-        decod = decode(data)
         print("--------------------")
-        print(decod)
+        print(decode(data))
         return f'The data you sent was: {data}'
     else:
         return 'Unsupported Media Type', 415
