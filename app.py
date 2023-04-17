@@ -9,7 +9,9 @@ def handle_post_request():
         # process the data
         print(data)
         print("--------------------")
-        print(decode(data))
+        decoded = decode(data)
+        as_dict = decoded.asdict()
+        print(as_dict)
         return f'The data you sent was: {data}'
     else:
         return 'Unsupported Media Type', 415
