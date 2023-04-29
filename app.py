@@ -17,7 +17,7 @@ def handle_post_request():
         data = request.get_data(as_text=True)
         splitData = data.split()
         if len(splitData) > 1:
-            res = NMEAMessage.assemble_from_iterable(
+            as_dict = NMEAMessage.assemble_from_iterable(
                 messages=[
                     NMEAMessage(str.encode(splitData[0])),
                     NMEAMessage(str.encode(splitData[1]))
@@ -25,7 +25,7 @@ def handle_post_request():
             ).decode().asdict()
             print(splitData)
             print("------")
-            print(res)
+            print(as_dict)
         else:
             decoded = decode(splitData[0])
             as_dict = decoded.asdict()
