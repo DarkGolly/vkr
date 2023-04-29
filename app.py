@@ -2,10 +2,14 @@ from flask import Flask, request
 from pyais import decode, NMEAMessage
 from pyais.stream import ByteStream
 
+from db import DataBase
+
 app = Flask(__name__)
 
 @app.route("/")
 def hello_world():
+    db = DataBase()
+    db.execute_query()
     return "This is VKR."
 @app.route('/post-handler', methods=['POST'])
 def handle_post_request():
@@ -28,6 +32,8 @@ def handle_post_request():
             print(splitData)
             print("-------")
             print(as_dict)
+        db = DataBase()
+        db.add_data(as_dict)
         return f'The data you sent was: {data}'
     else:
         return 'Unsupported Media Type', 415
