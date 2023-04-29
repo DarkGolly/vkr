@@ -1,28 +1,25 @@
 from flask import Flask, request
 from pyais import decode, NMEAMessage
+from pyais.stream import ByteStream
 
 app = Flask(__name__)
-
 @app.route('/post-handler', methods=['POST'])
 def handle_post_request():
     if request.content_type == 'text/plain':
         data = request.get_data(as_text=True)
-        # process the data
-        print(data)
+        splitData = data.split()
+        print(splitData)
         print("--------------------")
         #decoded = decode(data)
         #as_dict = decoded.asdict()
         #print(as_dict)
 
-        msg_2_part_0 = b'!AIVDM,2,1,9,A,538CQ>02A;h?D9QC800pu8@T>0P4l9E8L0000017Ah:;;5r50Ahm5;C0,0*0F'
-        msg_2_part_1 = b'!AIVDM,2,2,9,A,F@V@00000000000,2*3D'
+        #msg_2_part_0 = b'!AIVDM,2,1,9,A,538CQ>02A;h?D9QC800pu8@T>0P4l9E8L0000017Ah:;;5r50Ahm5;C0,0*0F'
+        #msg_2_part_1 = b'!AIVDM,2,2,9,A,F@V@00000000000,2*3D'
 
-        msg = NMEAMessage.assemble_from_iterable(
-            messages=[
-                NMEAMessage(msg_2_part_0),
-                NMEAMessage(msg_2_part_1)
-            ]
-        ).decode().to_json()
+        for msg in ByteStream(splitData):
+            decoded = msg.decode()
+            print(decoded)
         #print(msg)
         return f'The data you sent was: {data}'
     else:
