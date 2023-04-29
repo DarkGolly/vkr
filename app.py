@@ -17,7 +17,7 @@ def handle_post_request():
         #msg_2_part_0 = b'!AIVDM,2,1,9,A,538CQ>02A;h?D9QC800pu8@T>0P4l9E8L0000017Ah:;;5r50Ahm5;C0,0*0F'
         #msg_2_part_1 = b'!AIVDM,2,2,9,A,F@V@00000000000,2*3D'
 
-        for msg in ByteStream(splitData):
+        for msg in splitData:
             decoded = msg.decode()
             print(decoded)
         #print(msg)
