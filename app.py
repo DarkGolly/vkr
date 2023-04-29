@@ -10,8 +10,8 @@ def handle_post_request():
         # process the data
         print(data)
         print("--------------------")
-        decoded = decode(data)
-        as_dict = decoded.asdict()
+        #decoded = decode(data)
+        #as_dict = decoded.asdict()
         #print(as_dict)
 
         msg_2_part_0 = b'!AIVDM,2,1,9,A,538CQ>02A;h?D9QC800pu8@T>0P4l9E8L0000017Ah:;;5r50Ahm5;C0,0*0F'
@@ -23,7 +23,7 @@ def handle_post_request():
                 NMEAMessage(msg_2_part_1)
             ]
         ).decode().to_json()
-        print(msg)
+        #print(msg)
         return f'The data you sent was: {data}'
     else:
         return 'Unsupported Media Type', 415
