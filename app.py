@@ -3,24 +3,35 @@ from pyais import decode, NMEAMessage
 from pyais.stream import ByteStream
 
 app = Flask(__name__)
+
+@app.route("/")
+def hello_world():
+    data = ["!AIVDM,2,1,2,A,53Kt>r02BF18ta0>220eDm1Dh622222222222216D8T:F79V0ATUH31A8888,0*51",
+            "!AIVDM,2,2,2,A,88888888880,2*26"]
+    res = NMEAMessage.assemble_from_iterable(
+        messages=[
+            NMEAMessage(str.encode(data[0])),
+            NMEAMessage(str.encode(data[1]))
+        ]
+    ).decode().to_json()
+    return res
 @app.route('/post-handler', methods=['POST'])
 def handle_post_request():
     if request.content_type == 'text/plain':
         data = request.get_data(as_text=True)
         splitData = data.split()
-        print(splitData)
-        print("--------------------")
-        #decoded = decode(data)
-        #as_dict = decoded.asdict()
-        #print(as_dict)
-
-        #msg_2_part_0 = b'!AIVDM,2,1,9,A,538CQ>02A;h?D9QC800pu8@T>0P4l9E8L0000017Ah:;;5r50Ahm5;C0,0*0F'
-        #msg_2_part_1 = b'!AIVDM,2,2,9,A,F@V@00000000000,2*3D'
-
-        for msg in splitData:
-            decoded = msg.decode()
-            print(decoded)
-        #print(msg)
+        if len(splitData) > 1:
+            res = NMEAMessage.assemble_from_iterable(
+                messages=[
+                    NMEAMessage(str.encode(splitData[0])),
+                    NMEAMessage(str.encode(splitData[1]))
+                ]
+            ).decode().asdict()
+            print(res)
+        else:
+            decoded = decode(splitData[0])
+            as_dict = decoded.asdict()
+            print(as_dict)
         return f'The data you sent was: {data}'
     else:
         return 'Unsupported Media Type', 415
