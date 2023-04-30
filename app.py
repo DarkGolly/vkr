@@ -1,5 +1,8 @@
 from flask import Flask, render_template
 from flask_sock import Sock
+from pyais import decode, NMEAMessage
+
+from db import DataBase
 
 app = Flask(__name__)
 # app.config['SECRET_KEY'] = 'secret!'
