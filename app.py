@@ -4,7 +4,6 @@ from pyais import decode, NMEAMessage
 from db import DataBase
 
 app = Flask(__name__)
-db = DataBase()
 @app.route("/")
 def hello_world():
     return "This is VKR."
@@ -29,6 +28,7 @@ def handle_post_request():
             print(splitData)
             print("-------")
             print(as_dict)
+        db = DataBase()
         db.add_data(as_dict)
         return f'The data you sent was: {data}'
     else:
