@@ -1,19 +1,40 @@
 from flask import Flask, render_template
 from flask_sock import Sock
+
 app = Flask(__name__)
-#app.config['SECRET_KEY'] = 'secret!'
+# app.config['SECRET_KEY'] = 'secret!'
 sock = Sock(app)
-@app.route('/')
+
+
+@app.route("/")
 def index():
-    return render_template("This is VKR!")
+    return "This is VKR."
+
+
 @sock.route('/ais')
 def ais(ws):
     while True:
         text = ws.receive()
+        encoding_data(text)
         ws.send("Данные пришли!")
-        print(text)
-        print("---------------")
 
-
-#if __name__ == '__main__':
-#    app.run(host='0.0.0.0', debug=True)
+def encoding_data(data):
+    splitData = data.split()
+    if len(splitData) > 1:
+        as_dict = NMEAMessage.assemble_from_iterable(
+            messages=[
+                NMEAMessage(str.encode(splitData[0])),
+                NMEAMessage(str.encode(splitData[1]))
+            ]
+        ).decode().asdict()
+        print(splitData)
+        print("------")
+        print(as_dict)
+    else:
+        decoded = decode(splitData[0])
+        as_dict = decoded.asdict()
+        print(splitData)
+        print("-------")
+        print(as_dict)
+    db = DataBase()
+    db.add_data(as_dict)
