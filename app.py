@@ -1,38 +1,17 @@
-from flask import Flask, request
-from pyais import decode, NMEAMessage
-
-from db import DataBase
-
+from flask import Flask, render_template
+from flask_sock import Sock
 app = Flask(__name__)
-@app.route("/")
-def hello_world():
-    return "This is VKR."
-@app.route('/post-handler', methods=['POST'])
-def handle_post_request():
-    if request.content_type == 'text/plain':
-        data = request.get_data(as_text=True)
-        splitData = data.split()
-        if len(splitData) > 1:
-            as_dict = NMEAMessage.assemble_from_iterable(
-                messages=[
-                    NMEAMessage(str.encode(splitData[0])),
-                    NMEAMessage(str.encode(splitData[1]))
-                ]
-            ).decode().asdict()
-            print(splitData)
-            print("------")
-            print(as_dict)
-        else:
-            decoded = decode(splitData[0])
-            as_dict = decoded.asdict()
-            print(splitData)
-            print("-------")
-            print(as_dict)
-        db = DataBase()
-        db.add_data(as_dict)
-        return f'The data you sent was: {data}'
-    else:
-        return 'Unsupported Media Type', 415
+#app.config['SECRET_KEY'] = 'secret!'
+sock = Sock(app)
+@app.route('/')
+def index():
+    return render_template("This is VKR!")
+@sock.route('/ais')
+def ais(ws):
+    while True:
+        text = ws.receive()
+        ws.send("Данные пришли!")
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+
+#if __name__ == '__main__':
+#    app.run(host='0.0.0.0', debug=True)
