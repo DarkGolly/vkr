@@ -1,0 +1,74 @@
+#include <WiFi.h>
+#include <WebSocketClient.h>
+
+const char* ssid = "TP-LINK_ADFD68";
+const char* password = "14221521";
+
+char server_address[] = "90.156.225.21";
+char path[] = "/ais";
+const int server_port = 5000; // порт WebSocket на сервере Flask
+
+WebSocketClient webSocketClient;
+WiFiClient client;
+
+void setup() {
+  Serial.begin(9600);
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(1000);
+  }
+
+  if (client.connect(server_address, server_port)) {
+    Serial.println("Connected");
+  } else {
+    Serial.println("Connection failed.");
+  }
+ 
+  webSocketClient.path = path;
+  webSocketClient.host = server_address;
+  if (webSocketClient.handshake(client)) {
+    Serial.println("Handshake successful");
+  } else {
+    Serial.println("Handshake failed.");
+  }
+}
+
+void loop() {
+  String str;
+  char data;
+  char buffer[120]; // Буфер для строк
+  int index = 0;
+
+
+  while(data!='\n'){
+    if (Serial.available()) {
+      data = (char)Serial.read(); // Считываем символ
+      if (data != '\n') { // Если символ не является "новой строкой"
+        buffer[index] = data; // Добавляем символ в буфер
+        index++; // Увеличиваем индекс буфера
+      } else {
+        buffer[index] = '\0'; // Заканчиваем строку нулевым символом
+        str = String(buffer);
+        buffer[0]='\0';
+        index = 0;
+        Serial.println(str);
+        break;
+      }
+    }
+  }
+  if (client.connected()) {
+    String data;
+    webSocketClient.sendData(str);
+ 
+    webSocketClient.getData(data);
+    if (data.length() > 0) {
+      Serial.print("Ответ сервера: ");
+      Serial.println(data);
+    }
+ 
+  } else {
+    Serial.println("Client disconnected.");
+  }
+  delay(10000);
+}
+
