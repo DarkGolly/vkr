@@ -11,6 +11,8 @@ def ais(ws):
     while True:
         text = ws.receive()
         ws.send("Данные пришли!")
+        print(text)
+        print("---------------")
 
 
 #if __name__ == '__main__':
