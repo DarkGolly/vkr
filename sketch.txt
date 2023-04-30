@@ -1,0 +1,51 @@
+#include <WiFi.h>
+#include <HTTPClient.h>
+
+WiFiClient client;
+const char* ssid = "TP-LINK_ADFD68";
+const char* password = "14221521";
+
+const char* serverUrl = "http://90.156.225.21:5000/post-handler";
+
+void setup() {
+  Serial.begin(9600);
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(1000);
+  }
+}
+
+void loop() {
+  HTTPClient http;
+  String str;
+  char data;
+  char buffer[120]; // Буфер для строк
+  int index = 0;
+
+  http.begin(serverUrl);
+  http.addHeader("Content-Type", "text/plain");\
+  while(data!='\n'){
+    if (Serial.available()) {
+      data = (char)Serial.read(); // Считываем символ
+      if (data != '\n') { // Если символ не является "новой строкой"
+        buffer[index] = data; // Добавляем символ в буфер
+        index++; // Увеличиваем индекс буфера
+      } else {
+        buffer[index] = '\0'; // Заканчиваем строку нулевым символом
+        str = String(buffer);
+        buffer[0]='\0';
+        index = 0;
+        Serial.println(str);
+        break;
+      }
+    }
+  }
+  int httpResponseCode = http.POST(str);
+  Serial.println("Запрос отправлен: ");
+  Serial.print(httpResponseCode);
+  String response = http.getString();
+  Serial.println("Получен ответ: ");
+  //Serial.print(response);
+  http.end();
+  delay(10000);
+}
