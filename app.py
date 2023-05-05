@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask
 from flask_sock import Sock
 from pyais import decode, NMEAMessage
 
@@ -7,11 +7,10 @@ from db import DataBase
 app = Flask(__name__)
 # app.config['SECRET_KEY'] = 'secret!'
 sock = Sock(app)
-
-
 @app.route("/")
 def index():
-    return "This is VKR."
+    db = DataBase()
+    return db.execute_query()
 
 
 @sock.route('/ais')
@@ -41,3 +40,4 @@ def encoding_data(data):
         print(as_dict)
     db = DataBase()
     db.add_data(as_dict)
+

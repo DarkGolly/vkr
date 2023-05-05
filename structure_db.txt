@@ -1,0 +1,52 @@
+create table ais_destinations
+(
+    msg_type     integer,
+    repeat       integer,
+    mmsi         integer,
+    ais_version  integer,
+    imo          integer,
+    callsign     text,
+    shipname     text,
+    ship_type    text,
+    to_bow       integer,
+    to_stern     integer,
+    to_port      integer,
+    to_starboard integer,
+    epfd         text,
+    month        integer,
+    day          integer,
+    hour         integer,
+    minute       integer,
+    draught      double precision,
+    destination  text,
+    dte          boolean,
+    spare_1      integer
+);
+
+alter table ais_destinations
+    owner to darkgolly;
+
+create table ais_ships
+(
+    msg_type integer,
+    repeat   integer,
+    mmsi     integer,
+    status   text,
+    turn     text,
+    speed    double precision,
+    accuracy boolean,
+    lon      double precision,
+    lat      double precision,
+    course   double precision,
+    heading  integer,
+    second   integer,
+    maneuver text,
+    spare_1  text,
+    raim     boolean,
+    radio    integer,
+    date_rec date
+);
+
+alter table ais_ships
+    owner to darkgolly;
+
