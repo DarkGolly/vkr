@@ -3,14 +3,16 @@ from flask_sock import Sock
 from pyais import decode, NMEAMessage
 
 from db import DataBase
+from marker_maker import MarkersMaker
 
 app = Flask(__name__)
 # app.config['SECRET_KEY'] = 'secret!'
 sock = Sock(app)
 @app.route("/")
 def index():
-    db = DataBase()
-    return db.execute_query()
+    map = MarkersMaker()
+
+    return map.plotMarkers()
 
 
 @sock.route('/ais')

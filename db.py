@@ -6,17 +6,17 @@ import psycopg2
 class DataBase:
     connection = None
     cursor = None
+
     def __init__(self):
         try:
             self.connection = psycopg2.connect(host='localhost',
-                                database='ais_db',
-                                user=os.environ['DB_USERNAME'],
-                                password=os.environ['DB_PASSWORD'])
+                                               database='ais_db',
+                                               user=os.environ['DB_USERNAME'],
+                                               password=os.environ['DB_PASSWORD'])
             self.cursor = self.connection.cursor()
             print("База данных успешно подключена к Psql")
         except psycopg2.Error as error:
             print("Ошибка при подключении к Psql", error)
-
 
     def execute_query(self):
         sqlite_select_query = "select version();"
@@ -25,17 +25,24 @@ class DataBase:
         print("Версия базы данных Psql: ", record)
         return record
 
+    def execute_query_all(self):
+        sqlite_select_query = "select * from ais_ships;"
+        self.cursor.execute(sqlite_select_query)
+        record = self.cursor.fetchall()
+        print("Запрос успешен!")
+        return record
+
     def add_data(self, dict):
         columns = ', '.join(dict.keys())
-        if dict['msg_type']==1:
+        if dict['msg_type'] < 5:
             columns += ", date_rec"
-            replacement_dict = {"turn": repr(dict["turn"]),"status": repr(dict["status"]),
+            replacement_dict = {"turn": repr(dict["turn"]), "status": repr(dict["status"]),
                                 "maneuver": repr(dict["maneuver"]),
                                 "spare_1": 0, }
             dict.update(replacement_dict)
-            result = ', '.join([repr(val) for val in dict.values()]) + ', ' +repr(str(date.today()))
+            result = ', '.join([repr(val) for val in dict.values()]) + ', ' + repr(str(date.today()))
             query = f'INSERT INTO {"ais_ships"} ({columns}) VALUES ({result})'
-        elif dict['msg_type']==5:
+        elif dict['msg_type'] == 5:
             replacement_dict = {"ship_type": repr(dict["ship_type"]),
                                 "epfd": repr(dict["epfd"]),
                                 "spare_1": 0, }
