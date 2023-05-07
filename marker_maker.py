@@ -10,7 +10,7 @@ class MarkersMaker:
     ship = None
     def plotMarkers(self):
         map = folium.Map(
-            location=[59.911018, 30.23826],
+            location=[self.cur_list.pop()[8], self.cur_list.pop()[7]],
             tiles='Stamen Terrain',
             zoom_start=13
         )
