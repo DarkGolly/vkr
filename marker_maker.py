@@ -9,12 +9,12 @@ class MarkersMaker:
     cur_list = None
     ship = None
     def plotMarkers(self):
+        self._plotQuery()
         map = folium.Map(
             location=[self.cur_list.pop()[8], self.cur_list.pop()[7]],
             tiles='Stamen Terrain',
             zoom_start=13
         )
-        self._plotQuery()
         for i in self.cur_list:
             self.ship = Ship(i)
             folium.Marker(
