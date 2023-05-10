@@ -34,6 +34,7 @@ class DataBase:
 
     def add_data(self, dict):
         columns = ', '.join(dict.keys())
+        query = None
         if dict['msg_type'] < 5:
             columns += ", date_rec"
             replacement_dict = {"turn": repr(dict["turn"]), "status": repr(dict["status"]),
@@ -41,13 +42,28 @@ class DataBase:
                                 "spare_1": 0, }
             dict.update(replacement_dict)
             result = ', '.join([repr(val) for val in dict.values()]) + ', ' + repr(str(date.today()))
-            query = f'INSERT INTO {"ais_ships"} ({columns}) VALUES ({result})'
-        elif dict['msg_type'] == 5:
+            self.cursor.execute(f"SELECT mmsi, date_rec FROM ais_ships WHERE mmsi = {dict['mmsi']}")
+            existing_object = self.cursor.fetchone()
+            #'msg_type, repeat, mmsi, status, turn, speed, accuracy, lon, lat, course, heading, second, maneuver, spare_1, raim, radio, date_rec'
+            if existing_object:
+                # Объект найден, выполняем обновление
+                self.cursor.execute("UPDATE ais_ships SET msg_type = %s, repeat = %s, status = %s, turn = %s, speed"
+                                    " = %s, accuracy = %s, lon = %s, lat = %s, course = %s, heading = %s, second = %s,"
+                                    " maneuver = %s, spare_1 = %s, raim = %s, radio = %s, date_rec = %s WHERE mmsi ="
+                                    " %s RETURNING mmsi", (dict['msg_type'], dict['repeat'], dict['status'], dict['turn'], dict['speed'],
+                                    dict['accuracy'], dict['lon'], dict['lat'], dict['course'], dict['heading'], dict['second'], dict['maneuver'],
+                                    dict['spare_1'], dict['raim'], dict['radio'], existing_object[1], dict['mmsi']))
+
+            else:
+                query = f'INSERT INTO {"ais_ships"} ({columns}) VALUES ({result})'
+                self.cursor.execute(query, dict)
+
+        elif dict['msg_type'] >= 5:
             replacement_dict = {"ship_type": repr(dict["ship_type"]),
                                 "epfd": repr(dict["epfd"]),
                                 "spare_1": 0, }
             dict.update(replacement_dict)
             result = ', '.join([repr(val) for val in dict.values()])
             query = f'INSERT INTO {"ais_destinations"} ({columns}) VALUES ({result})'
-        self.cursor.execute(query, dict)
+            self.cursor.execute(query, dict)
         self.connection.commit()
