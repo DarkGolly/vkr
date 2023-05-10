@@ -29,6 +29,7 @@ class DataBase:
         sqlite_select_query = "select * from ais_ships;"
         self.cursor.execute(sqlite_select_query)
         record = self.cursor.fetchall()
+        print(record)
         print("Запрос успешен!")
         return record
 
