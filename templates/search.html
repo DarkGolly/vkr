@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<form  method="POST" action="/process_data">
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Название судна / Ship name</label>
+    <input type="text" class="form-control" id="name" value="" name="name" placeholder="Название судна">
+  </div>
+    <div class="form-group">
+    <label for="exampleFormControlInput1">Позывной / Call sign</label>
+    <input type="text" class="form-control" id="callsign" value="" name="callsign" placeholder="Позывной">
+    </div>
+    <div class="form-group">
+    <label for="exampleFormControlInput1">Идентификационный номер судна / IMO</label>
+    <input type="text" class="form-control" id="IMO" name="IMO" value="" placeholder="IMO">
+    </div>
+    <div class="form-group">
+    <label for="exampleFormControlInput1">Идентификационный номер станции / mmsi</label>
+    <input type="text" class="form-control" name="mmsi" value="" placeholder="mmsi">
+    </div>
+  <div class="form-group">
+    <label for="exampleFormControlSelect1">Статус судна / Status</label>
+    <select class="form-control" name="status" id="status">
+        <option></option>
+      {% for rec in recs %}
+        <option value="{{ rec }}">{{ rec }}</option>
+      {% endfor %}
+    </select>
+  </div>
+<div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" name="full" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Включить полные данные о судах</label>
+  </div>
+<button type="submit" class="btn btn-primary mb-2">Найти</button>
+</form>
+    <script>
+const checkbox = document.querySelector('#exampleCheck1');
+const input = document.querySelector('#name');
+input.disabled = true;
+const input1 = document.querySelector('#callsign');
+input1.disabled = true;
+const input2 = document.querySelector('#IMO');
+input2.disabled = true;
+checkbox.addEventListener('click', function() {
+  if(checkbox.checked) {
+    input.disabled = false;
+    input1.disabled = false;
+    input2.disabled = false;
+  } else {
+    input.disabled = true;
+    input1.disabled = true;
+    input2.disabled = true;
+  }
+});
+</script>
+{% endblock %}

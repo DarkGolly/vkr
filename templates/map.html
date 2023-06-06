@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_4a6b7c3686876f6208666814ed768b64 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 80.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_4a6b7c3686876f6208666814ed768b64" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_4a6b7c3686876f6208666814ed768b64 = L.map(
+                "map_4a6b7c3686876f6208666814ed768b64",
+                {
+                    center: [59.912605, 30.245085],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 12,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_760982dbb1a3108d4160a67fde7a6c14 = L.tileLayer(
+                "https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.jpg",
+                {"attribution": "Map tiles by \u003ca target=\"_blank\" href=\"http://stamen.com\"\u003eStamen Design\u003c/a\u003e, under \u003ca target=\"_blank\" href=\"http://creativecommons.org/licenses/by/3.0\"\u003eCC BY 3.0\u003c/a\u003e. Data by \u0026copy; \u003ca target=\"_blank\" href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca target=\"_blank\" href=\"http://creativecommons.org/licenses/by-sa/3.0\"\u003eCC BY SA\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_4a6b7c3686876f6208666814ed768b64);
+        
+    
+            var marker_df0c3d3da307af83a55a3d4cf8110e46 = L.marker(
+                [59.911045, 30.237645],
+                {}
+            ).addTo(map_4a6b7c3686876f6208666814ed768b64);
+        
+    
+            var div_icon_51cc6513feaba466e417bd5056dfb31a = L.divIcon({"className": "empty", "html": "\u003cdiv style=\"color:#f00;content:url(static/marker.png);width:30px;\n                                    transform: rotate(247.8deg);text-align:center;\"\u003e\u003c/div\u003e"});
+            marker_df0c3d3da307af83a55a3d4cf8110e46.setIcon(div_icon_51cc6513feaba466e417bd5056dfb31a);
+        
+    
+        var popup_5dba60a1f1fb6c323e0dcc7e5a26cec4 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_8c38876d2381fec20c80a768be76239d = $(`<div id="html_8c38876d2381fec20c80a768be76239d" style="width: 100.0%; height: 100.0%;">Идентификатор: 273315660 Курс: 247.8  <a href="http://127.0.0.1:5000/ship/273315660">about</a></div>`)[0];
+                popup_5dba60a1f1fb6c323e0dcc7e5a26cec4.setContent(html_8c38876d2381fec20c80a768be76239d);
+            
+        
+
+        marker_df0c3d3da307af83a55a3d4cf8110e46.bindPopup(popup_5dba60a1f1fb6c323e0dcc7e5a26cec4)
+        ;
+
+        
+    
+    
+            marker_df0c3d3da307af83a55a3d4cf8110e46.bindTooltip(
+                `<div>
+                     Подробнее
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_c01949c5b2630798e359269c04307b93 = L.marker(
+                [59.919052, 30.252315],
+                {}
+            ).addTo(map_4a6b7c3686876f6208666814ed768b64);
+        
+    
+            var div_icon_bcf3c4ba9e99b294cf193a9f73488199 = L.divIcon({"className": "empty", "html": "\u003cdiv style=\"color:#f00;content:url(static/marker.png);width:30px;\n                                    transform: rotate(119.7deg);text-align:center;\"\u003e\u003c/div\u003e"});
+            marker_c01949c5b2630798e359269c04307b93.setIcon(div_icon_bcf3c4ba9e99b294cf193a9f73488199);
+        
+    
+        var popup_7e7082ef36893f0a0c96296031d4e753 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_77816e748dc9736dcb15a7179de0dcf0 = $(`<div id="html_77816e748dc9736dcb15a7179de0dcf0" style="width: 100.0%; height: 100.0%;">Идентификатор: 273396640 Курс: 119.7  <a href="http://127.0.0.1:5000/ship/273396640">about</a></div>`)[0];
+                popup_7e7082ef36893f0a0c96296031d4e753.setContent(html_77816e748dc9736dcb15a7179de0dcf0);
+            
+        
+
+        marker_c01949c5b2630798e359269c04307b93.bindPopup(popup_7e7082ef36893f0a0c96296031d4e753)
+        ;
+
+        
+    
+    
+            marker_c01949c5b2630798e359269c04307b93.bindTooltip(
+                `<div>
+                     Подробнее
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_67de9a8fbcdb41ea423299df63995bd2 = L.marker(
+                [59.910762, 30.237473],
+                {}
+            ).addTo(map_4a6b7c3686876f6208666814ed768b64);
+        
+    
+            var div_icon_7e9bc78e1d3e0bfe395861f67fae0807 = L.divIcon({"className": "empty", "html": "\u003cdiv style=\"color:#f00;content:url(static/marker.png);width:30px;\n                                    transform: rotate(284.8deg);text-align:center;\"\u003e\u003c/div\u003e"});
+            marker_67de9a8fbcdb41ea423299df63995bd2.setIcon(div_icon_7e9bc78e1d3e0bfe395861f67fae0807);
+        
+    
+        var popup_be69e1212869f1097e7747043ec9849a = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_628dd0e42eaab65647188b3f35ac07c7 = $(`<div id="html_628dd0e42eaab65647188b3f35ac07c7" style="width: 100.0%; height: 100.0%;">Идентификатор: 273315070 Курс: 284.8  <a href="http://127.0.0.1:5000/ship/273315070">about</a></div>`)[0];
+                popup_be69e1212869f1097e7747043ec9849a.setContent(html_628dd0e42eaab65647188b3f35ac07c7);
+            
+        
+
+        marker_67de9a8fbcdb41ea423299df63995bd2.bindPopup(popup_be69e1212869f1097e7747043ec9849a)
+        ;
+
+        
+    
+    
+            marker_67de9a8fbcdb41ea423299df63995bd2.bindTooltip(
+                `<div>
+                     Подробнее
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_17086be5630363ccf28d5b6e361604e2 = L.marker(
+                [59.909573, 30.225898],
+                {}
+            ).addTo(map_4a6b7c3686876f6208666814ed768b64);
+        
+    
+            var div_icon_ae5354293daf1161a1ece43eb25ea8e9 = L.divIcon({"className": "empty", "html": "\u003cdiv style=\"color:#f00;content:url(static/marker.png);width:30px;\n                                    transform: rotate(29.0deg);text-align:center;\"\u003e\u003c/div\u003e"});
+            marker_17086be5630363ccf28d5b6e361604e2.setIcon(div_icon_ae5354293daf1161a1ece43eb25ea8e9);
+        
+    
+        var popup_ac1f8590f526bc2deacf5e876dec42fb = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_84bcaf21e266a10d1ebc1ab7dc866e4d = $(`<div id="html_84bcaf21e266a10d1ebc1ab7dc866e4d" style="width: 100.0%; height: 100.0%;">Идентификатор: 273390590 Курс: 29.0  <a href="http://127.0.0.1:5000/ship/273390590">about</a></div>`)[0];
+                popup_ac1f8590f526bc2deacf5e876dec42fb.setContent(html_84bcaf21e266a10d1ebc1ab7dc866e4d);
+            
+        
+
+        marker_17086be5630363ccf28d5b6e361604e2.bindPopup(popup_ac1f8590f526bc2deacf5e876dec42fb)
+        ;
+
+        
+    
+    
+            marker_17086be5630363ccf28d5b6e361604e2.bindTooltip(
+                `<div>
+                     Подробнее
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_e76b7462762ae7a11b9c787d45c45561 = L.marker(
+                [59.91238, 30.22833],
+                {}
+            ).addTo(map_4a6b7c3686876f6208666814ed768b64);
+        
+    
+            var div_icon_3a566e64c33c6cbb639edbde63aa86e6 = L.divIcon({"className": "empty", "html": "\u003cdiv style=\"color:#f00;content:url(static/marker.png);width:30px;\n                                    transform: rotate(198.0deg);text-align:center;\"\u003e\u003c/div\u003e"});
+            marker_e76b7462762ae7a11b9c787d45c45561.setIcon(div_icon_3a566e64c33c6cbb639edbde63aa86e6);
+        
+    
+        var popup_0aaa8b60e77ab465b1bd71272e0a1f11 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_5b15b0d59026ca49ae596622ae276995 = $(`<div id="html_5b15b0d59026ca49ae596622ae276995" style="width: 100.0%; height: 100.0%;">Идентификатор: 273210370 Курс: 198.0  <a href="http://127.0.0.1:5000/ship/273210370">about</a></div>`)[0];
+                popup_0aaa8b60e77ab465b1bd71272e0a1f11.setContent(html_5b15b0d59026ca49ae596622ae276995);
+            
+        
+
+        marker_e76b7462762ae7a11b9c787d45c45561.bindPopup(popup_0aaa8b60e77ab465b1bd71272e0a1f11)
+        ;
+
+        
+    
+    
+            marker_e76b7462762ae7a11b9c787d45c45561.bindTooltip(
+                `<div>
+                     Подробнее
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_36a2a43862a2d2efaf1854d8b17a3a74 = L.marker(
+                [59.905248, 30.227662],
+                {}
+            ).addTo(map_4a6b7c3686876f6208666814ed768b64);
+        
+    
+            var div_icon_9f72115e6e4ef37cbe5618f6005d4034 = L.divIcon({"className": "empty", "html": "\u003cdiv style=\"color:#f00;content:url(static/marker.png);width:30px;\n                                    transform: rotate(342.8deg);text-align:center;\"\u003e\u003c/div\u003e"});
+            marker_36a2a43862a2d2efaf1854d8b17a3a74.setIcon(div_icon_9f72115e6e4ef37cbe5618f6005d4034);
+        
+    
+        var popup_682daad32ff40b01471d62e005cd8402 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_d461ae4b2e87a2ff041712fe5edc765e = $(`<div id="html_d461ae4b2e87a2ff041712fe5edc765e" style="width: 100.0%; height: 100.0%;">Идентификатор: 564054000 Курс: 342.8  <a href="http://127.0.0.1:5000/ship/564054000">about</a></div>`)[0];
+                popup_682daad32ff40b01471d62e005cd8402.setContent(html_d461ae4b2e87a2ff041712fe5edc765e);
+            
+        
+
+        marker_36a2a43862a2d2efaf1854d8b17a3a74.bindPopup(popup_682daad32ff40b01471d62e005cd8402)
+        ;
+
+        
+    
+    
+            marker_36a2a43862a2d2efaf1854d8b17a3a74.bindTooltip(
+                `<div>
+                     Подробнее
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_42cd7a0ac7bd5592f3b33fa2c2008262 = L.marker(
+                [59.914882, 30.253023],
+                {}
+            ).addTo(map_4a6b7c3686876f6208666814ed768b64);
+        
+    
+            var div_icon_d84e02a99e4058168dba8c55bd87fda6 = L.divIcon({"className": "empty", "html": "\u003cdiv style=\"color:#f00;content:url(static/marker.png);width:30px;\n                                    transform: rotate(317.5deg);text-align:center;\"\u003e\u003c/div\u003e"});
+            marker_42cd7a0ac7bd5592f3b33fa2c2008262.setIcon(div_icon_d84e02a99e4058168dba8c55bd87fda6);
+        
+    
+        var popup_e303fa1c7f03e0844b27c8d71ea714f9 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_97a01af827144f4f948402fc15020149 = $(`<div id="html_97a01af827144f4f948402fc15020149" style="width: 100.0%; height: 100.0%;">Идентификатор: 538004053 Курс: 317.5  <a href="http://127.0.0.1:5000/ship/538004053">about</a></div>`)[0];
+                popup_e303fa1c7f03e0844b27c8d71ea714f9.setContent(html_97a01af827144f4f948402fc15020149);
+            
+        
+
+        marker_42cd7a0ac7bd5592f3b33fa2c2008262.bindPopup(popup_e303fa1c7f03e0844b27c8d71ea714f9)
+        ;
+
+        
+    
+    
+            marker_42cd7a0ac7bd5592f3b33fa2c2008262.bindTooltip(
+                `<div>
+                     Подробнее
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_36a802dd491885ffec2e58d5eaa694ba = L.marker(
+                [59.886875, 30.20118],
+                {}
+            ).addTo(map_4a6b7c3686876f6208666814ed768b64);
+        
+    
+            var div_icon_e1de6f8b93f980a142472bd663f012a1 = L.divIcon({"className": "empty", "html": "\u003cdiv style=\"color:#f00;content:url(static/marker.png);width:30px;\n                                    transform: rotate(341.4deg);text-align:center;\"\u003e\u003c/div\u003e"});
+            marker_36a802dd491885ffec2e58d5eaa694ba.setIcon(div_icon_e1de6f8b93f980a142472bd663f012a1);
+        
+    
+        var popup_bc538dbc2cb37607ddbce62eded82793 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_d4bd8c43f1e872009f56dc76a953259a = $(`<div id="html_d4bd8c43f1e872009f56dc76a953259a" style="width: 100.0%; height: 100.0%;">Идентификатор: 273355640 Курс: 341.4  <a href="http://127.0.0.1:5000/ship/273355640">about</a></div>`)[0];
+                popup_bc538dbc2cb37607ddbce62eded82793.setContent(html_d4bd8c43f1e872009f56dc76a953259a);
+            
+        
+
+        marker_36a802dd491885ffec2e58d5eaa694ba.bindPopup(popup_bc538dbc2cb37607ddbce62eded82793)
+        ;
+
+        
+    
+    
+            marker_36a802dd491885ffec2e58d5eaa694ba.bindTooltip(
+                `<div>
+                     Подробнее
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_31459bb21b5380ddfede2a2f55087ccb = L.marker(
+                [91.0, 181.0],
+                {}
+            ).addTo(map_4a6b7c3686876f6208666814ed768b64);
+        
+    
+            var div_icon_7acab29d4132d44bb25f92661863534d = L.divIcon({"className": "empty", "html": "\u003cdiv style=\"color:#f00;content:url(static/marker.png);width:30px;\n                                    transform: rotate(360.0deg);text-align:center;\"\u003e\u003c/div\u003e"});
+            marker_31459bb21b5380ddfede2a2f55087ccb.setIcon(div_icon_7acab29d4132d44bb25f92661863534d);
+        
+    
+        var popup_c913e2ad0f35bcd9eaf8589d75e92852 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_6aed8be3ec79c31eed94ce1b854389d0 = $(`<div id="html_6aed8be3ec79c31eed94ce1b854389d0" style="width: 100.0%; height: 100.0%;">Идентификатор: 123123123 Курс: 360.0  <a href="http://127.0.0.1:5000/ship/123123123">about</a></div>`)[0];
+                popup_c913e2ad0f35bcd9eaf8589d75e92852.setContent(html_6aed8be3ec79c31eed94ce1b854389d0);
+            
+        
+
+        marker_31459bb21b5380ddfede2a2f55087ccb.bindPopup(popup_c913e2ad0f35bcd9eaf8589d75e92852)
+        ;
+
+        
+    
+    
+            marker_31459bb21b5380ddfede2a2f55087ccb.bindTooltip(
+                `<div>
+                     Подробнее
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_ff7a628afd0775baf93b354abfcb1624 = L.marker(
+                [91.0, 181.0],
+                {}
+            ).addTo(map_4a6b7c3686876f6208666814ed768b64);
+        
+    
+            var div_icon_ec813fd854d886b721b73c6701c7ff3b = L.divIcon({"className": "empty", "html": "\u003cdiv style=\"color:#f00;content:url(static/marker.png);width:30px;\n                                    transform: rotate(360.0deg);text-align:center;\"\u003e\u003c/div\u003e"});
+            marker_ff7a628afd0775baf93b354abfcb1624.setIcon(div_icon_ec813fd854d886b721b73c6701c7ff3b);
+        
+    
+        var popup_349c22b572f142f6c1b208f578a3cb1b = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_386fdd8fbb9d89833dd98da0fd435469 = $(`<div id="html_386fdd8fbb9d89833dd98da0fd435469" style="width: 100.0%; height: 100.0%;">Идентификатор: 273362790 Курс: 360.0  <a href="http://127.0.0.1:5000/ship/273362790">about</a></div>`)[0];
+                popup_349c22b572f142f6c1b208f578a3cb1b.setContent(html_386fdd8fbb9d89833dd98da0fd435469);
+            
+        
+
+        marker_ff7a628afd0775baf93b354abfcb1624.bindPopup(popup_349c22b572f142f6c1b208f578a3cb1b)
+        ;
+
+        
+    
+    
+            marker_ff7a628afd0775baf93b354abfcb1624.bindTooltip(
+                `<div>
+                     Подробнее
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_d2eb0c17927162cb6cb410df4216c051 = L.marker(
+                [59.906645, 30.220345],
+                {}
+            ).addTo(map_4a6b7c3686876f6208666814ed768b64);
+        
+    
+            var div_icon_7cdf5e8467543674ff633602d467e35d = L.divIcon({"className": "empty", "html": "\u003cdiv style=\"color:#f00;content:url(static/marker.png);width:30px;\n                                    transform: rotate(360.0deg);text-align:center;\"\u003e\u003c/div\u003e"});
+            marker_d2eb0c17927162cb6cb410df4216c051.setIcon(div_icon_7cdf5e8467543674ff633602d467e35d);
+        
+    
+        var popup_c868e1390cc5d1a4f54891d33b015d0c = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_7ccd4099628f7b4d0773b26b5d3b90d2 = $(`<div id="html_7ccd4099628f7b4d0773b26b5d3b90d2" style="width: 100.0%; height: 100.0%;">Идентификатор: 273216390 Курс: 360.0  <a href="http://127.0.0.1:5000/ship/273216390">about</a></div>`)[0];
+                popup_c868e1390cc5d1a4f54891d33b015d0c.setContent(html_7ccd4099628f7b4d0773b26b5d3b90d2);
+            
+        
+
+        marker_d2eb0c17927162cb6cb410df4216c051.bindPopup(popup_c868e1390cc5d1a4f54891d33b015d0c)
+        ;
+
+        
+    
+    
+            marker_d2eb0c17927162cb6cb410df4216c051.bindTooltip(
+                `<div>
+                     Подробнее
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_63b44af3d375204ff722ae42e71a4dfc = L.marker(
+                [59.912605, 30.245085],
+                {}
+            ).addTo(map_4a6b7c3686876f6208666814ed768b64);
+        
+    
+            var div_icon_431feabbae1bafd23f79e958b15b0aa9 = L.divIcon({"className": "empty", "html": "\u003cdiv style=\"color:#f00;content:url(static/marker.png);width:30px;\n                                    transform: rotate(318.6deg);text-align:center;\"\u003e\u003c/div\u003e"});
+            marker_63b44af3d375204ff722ae42e71a4dfc.setIcon(div_icon_431feabbae1bafd23f79e958b15b0aa9);
+        
+    
+        var popup_b6eeeb6e496ad94ce525d955201b486e = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_4fa15d997508a5362844d6e47e222f21 = $(`<div id="html_4fa15d997508a5362844d6e47e222f21" style="width: 100.0%; height: 100.0%;">Идентификатор: 273445880 Курс: 318.6  <a href="http://127.0.0.1:5000/ship/273445880">about</a></div>`)[0];
+                popup_b6eeeb6e496ad94ce525d955201b486e.setContent(html_4fa15d997508a5362844d6e47e222f21);
+            
+        
+
+        marker_63b44af3d375204ff722ae42e71a4dfc.bindPopup(popup_b6eeeb6e496ad94ce525d955201b486e)
+        ;
+
+        
+    
+    
+            marker_63b44af3d375204ff722ae42e71a4dfc.bindTooltip(
+                `<div>
+                     Подробнее
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_6b8521c2f40ba7e33961cadb8e5c8967 = L.marker(
+                [59.91204, 30.232967],
+                {}
+            ).addTo(map_4a6b7c3686876f6208666814ed768b64);
+        
+    
+            var div_icon_ae3b0a6d449a7148c2fbadab4497a178 = L.divIcon({"className": "empty", "html": "\u003cdiv style=\"color:#f00;content:url(static/marker.png);width:30px;\n                                    transform: rotate(173.5deg);text-align:center;\"\u003e\u003c/div\u003e"});
+            marker_6b8521c2f40ba7e33961cadb8e5c8967.setIcon(div_icon_ae3b0a6d449a7148c2fbadab4497a178);
+        
+    
+        var popup_f7f63cb30a67d699a1a7c495f30ff60c = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_97e39fbdedcd3e85611e9edeeb9a828e = $(`<div id="html_97e39fbdedcd3e85611e9edeeb9a828e" style="width: 100.0%; height: 100.0%;">Идентификатор: 273369610 Курс: 173.5  <a href="http://127.0.0.1:5000/ship/273369610">about</a></div>`)[0];
+                popup_f7f63cb30a67d699a1a7c495f30ff60c.setContent(html_97e39fbdedcd3e85611e9edeeb9a828e);
+            
+        
+
+        marker_6b8521c2f40ba7e33961cadb8e5c8967.bindPopup(popup_f7f63cb30a67d699a1a7c495f30ff60c)
+        ;
+
+        
+    
+    
+            marker_6b8521c2f40ba7e33961cadb8e5c8967.bindTooltip(
+                `<div>
+                     Подробнее
+                 </div>`,
+                {"sticky": true}
+            );
+        
+</script>
+</html>

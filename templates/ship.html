@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<dl class="row">
+  <dt class="col-sm-3">Идентификатор</dt>
+  <dd class="col-sm-9">{{ data.mmsi }}</dd>
+  <dt class="col-sm-3">Статус</dt>
+  <dd class="col-sm-9">{{ data.status }}</dd>
+  <dt class="col-sm-3">Поворот</dt>
+  <dd class="col-sm-9">{{ data.turn }}</dd>
+  <dt class="col-sm-3">Скорость</dt>
+  <dd class="col-sm-9">{{ data.speed }}</dd>
+  <dt class="col-sm-3">Точность</dt>
+  <dd class="col-sm-9">{{ data.accuracy }}</dd>
+  <dt class="col-sm-3">Долгота</dt>
+  <dd class="col-sm-9">{{ data.lon }}</dd>
+  <dt class="col-sm-3">Широта</dt>
+  <dd class="col-sm-9">{{ data.lat }}</dd>
+  <dt class="col-sm-3">Курс</dt>
+  <dd class="col-sm-9">{{ data.course }}</dd>
+  <dt class="col-sm-3">Маневр</dt>
+  <dd class="col-sm-9">{{ data.maneuver }}</dd>
+  <dt class="col-sm-3">Угол направления | heading</dt>
+  <dd class="col-sm-9">{{ data.heading }}</dd>
+  <dt class="col-sm-3">second</dt>
+  <dd class="col-sm-9">{{ data.second }}</dd>
+  <dt class="col-sm-3">raim</dt>
+  <dd class="col-sm-9">{{ data.raim }}</dd>
+  <dt class="col-sm-3">radio</dt>
+  <dd class="col-sm-9">{{ data.radio }}</dd>
+  <dt class="col-sm-3">Дата добавления</dt>
+  <dd class="col-sm-9">{{ data.date_rec }}</dd>
+
+</dl>
+{% endblock %}
