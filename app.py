@@ -5,28 +5,24 @@ from pyais import decode, NMEAMessage
 from Ship import Ship
 from db import DataBase
 from marker_maker import MarkersMaker
-
+import asyncio
+import websockets
 
 app = Flask(__name__)
-sock = Sock(app)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
+app.config['SOCK_SERVER_OPTIONS'] = {'ping_interval': 25}
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
-
 # app.config['SECRET_KEY'] = 'secret!'
 
-
+sock = Sock(app)
 
 
 @app.route("/", methods=["POST", "GET"])
 def index():
     map = MarkersMaker()
-    #as_dict = NMEAMessage.assemble_from_iterable(
-    #    messages=[
-    #        NMEAMessage(str.encode("!AIVDM,2,1,4,A,54VOmf82>9uD?IHS@00@4qD8F0PTLQL5T000001639sD55`i0APTSkRh@000,0*2C")),
-    #        NMEAMessage(str.encode("!AIVDM,2,2,4,A,00000000000,2*20"))
-    #    ]
-    #).decode().asdict()
+    #decoded = decode("!AIVDM,1,1,,A,144fk`1Oh5R:NvrRBCAlhE;V2000,0*47")
+    #as_dict = decoded.asdict()
     #db = DataBase()
     #db.add_data(as_dict)
     map.plotMarkers(None, 'off')
@@ -109,6 +105,7 @@ def ais(ws):
     while True:
         text = ws.receive()
         ws.send("Данные пришли!")
+        #print(text)
         encoding_data(text)
 
 
