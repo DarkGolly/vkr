@@ -33,13 +33,18 @@ class DataBase:
     def execute_query_twise(self, params):
         print(params)
         new = {}
-        query = "SELECT * FROM ais_ships JOIN ais_meta ON ais_ships.mmsi = ais_meta.mmsi WHERE "
+        query = "SELECT * FROM ais_ships JOIN ais_meta ON ais_ships.mmsi = ais_meta.mmsi "
+        count = 0
         for param in params:
             if params[param] != '':
-                new.update({param:params[param]})
-        query += ' AND '.join([f'{condition} = {params[condition]}' for condition in new])
-        if len(new)==0:
-            return {}
+                new.update({param: params[param]})
+            else:
+                count += 1
+
+        if count < 5:
+            query += "WHERE "
+            query += ' AND '.join([f'{condition} = {params[condition]}' for condition in new])
+
         try:
             self.cursor.execute(query)
             record = self.cursor.fetchall()
@@ -48,13 +53,11 @@ class DataBase:
         except EnvironmentError:
             print('Ошибка запроса!')
 
-
-
     def execute_query_all(self):
         sqlite_select_query = "select * from ais_ships;"
         self.cursor.execute(sqlite_select_query)
         record = self.cursor.fetchall()
-        #print(record)
+        # print(record)
         print("Запрос успешен!")
         return record
 
@@ -70,15 +73,17 @@ class DataBase:
             result = ', '.join([repr(val) for val in dict.values()]) + ', ' + repr(str(date.today()))
             self.cursor.execute(f"SELECT mmsi FROM ais_ships WHERE mmsi = {dict['mmsi']}")
             existing_object = self.cursor.fetchone()
-            #'msg_type, repeat, mmsi, status, turn, speed, accuracy, lon, lat, course, heading, second, maneuver, spare_1, raim, radio, date_rec'
+            # 'msg_type, repeat, mmsi, status, turn, speed, accuracy, lon, lat, course, heading, second, maneuver, spare_1, raim, radio, date_rec'
             if existing_object:
                 # Объект найден, выполняем обновление
                 self.cursor.execute("UPDATE ais_ships SET msg_type = %s, repeat = %s, status = %s, turn = %s, speed"
                                     " = %s, accuracy = %s, lon = %s, lat = %s, course = %s, heading = %s, second = %s,"
                                     " maneuver = %s, spare_1 = %s, raim = %s, radio = %s, date_rec = %s WHERE mmsi ="
-                                    " %s RETURNING mmsi", (dict['msg_type'], dict['repeat'], dict['status'], dict['turn'], dict['speed'],
-                                    dict['accuracy'], dict['lon'], dict['lat'], dict['course'], dict['heading'], dict['second'], dict['maneuver'],
-                                    dict['spare_1'], dict['raim'], dict['radio'], str(date.today()), dict['mmsi']))
+                                    " %s RETURNING mmsi",
+                                    (dict['msg_type'], dict['repeat'], dict['status'], dict['turn'], dict['speed'],
+                                     dict['accuracy'], dict['lon'], dict['lat'], dict['course'], dict['heading'],
+                                     dict['second'], dict['maneuver'],
+                                     dict['spare_1'], dict['raim'], dict['radio'], str(date.today()), dict['mmsi']))
             else:
                 query = f'INSERT INTO {"ais_ships"} ({columns}) VALUES ({result})'
                 self.cursor.execute(query, dict)
@@ -92,14 +97,15 @@ class DataBase:
             self.cursor.execute(f"SELECT mmsi FROM ais_meta WHERE mmsi = {dict['mmsi']}")
             existing_object = self.cursor.fetchone()
             if existing_object:
-                self.cursor.execute("UPDATE ais_meta SET msg_type = %s, repeat = %s, ais_version = %s, imo = %s, callsign"
-                                    " = %s, shipname = %s, ship_type = %s, to_bow = %s, to_stern = %s, to_port = %s, to_starboard = %s,"
-                                    " epfd = %s, month = %s, day = %s, hour = %s, minute = %s, draught= %s, destination"
-                                    "= %s, dte= %s, spare_1= %s  WHERE mmsi = %s RETURNING mmsi",
-                                    (dict['msg_type'], dict['repeat'], dict['ais_version'], dict['imo'], dict['callsign'],
-                                     dict['shipname'], dict['ship_type'], dict['to_bow'], dict['to_stern'], dict['to_port'],
-                                     dict['to_starboard'], dict['epfd'], dict['month'], dict['day'], dict['hour'],
-                                     dict['minute'], dict['draught'], dict['destination'], dict['dte'], dict['spare_1'], dict['mmsi']))
+                self.cursor.execute(
+                    "UPDATE ais_meta SET msg_type = %s, repeat = %s, ais_version = %s, imo = %s, callsign"
+                    " = %s, shipname = %s, ship_type = %s, to_bow = %s, to_stern = %s, to_port = %s, to_starboard = %s,"
+                    " epfd = %s, month = %s, day = %s, hour = %s, minute = %s, draught= %s, destination"
+                    "= %s, dte= %s, spare_1= %s  WHERE mmsi = %s RETURNING mmsi",
+                    (dict['msg_type'], dict['repeat'], dict['ais_version'], dict['imo'], dict['callsign'],
+                     dict['shipname'], dict['ship_type'], dict['to_bow'], dict['to_stern'], dict['to_port'],
+                     dict['to_starboard'], dict['epfd'], dict['month'], dict['day'], dict['hour'],
+                     dict['minute'], dict['draught'], dict['destination'], dict['dte'], dict['spare_1'], dict['mmsi']))
             else:
                 query = f'INSERT INTO {"ais_meta"} ({columns}) VALUES ({result})'
                 self.cursor.execute(query, dict)
@@ -115,13 +121,14 @@ class DataBase:
     def execute_query_on(self, params):
         print(params)
         new = {}
-        query = "SELECT * FROM ais_ships WHERE "
+        count = 0
+        query = "SELECT * FROM ais_ships "
         for param in params:
             if params[param] != '':
                 new.update({param: params[param]})
-        query += ' AND '.join([f'{condition} = {params[condition]}' for condition in new])
-        if len(new)==0:
-            return {}
+        if count < 5:
+            query += "WHERE "
+            query += ' AND '.join([f'{condition} = {params[condition]}' for condition in new])
         try:
             self.cursor.execute(query)
             record = self.cursor.fetchall()
