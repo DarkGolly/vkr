@@ -20,6 +20,8 @@ class MarkersMaker:
             width='100%',
             height='80%'
         )
+        if len(self.cur_list)<1:
+            return 0
         self.ship = Ship(self.cur_list[0])
 
         folium.Marker(
@@ -75,7 +77,7 @@ class MarkersMaker:
         folium.Marker(
             location=[self.meta.lat, self.meta.lon],
             popup='Идентификатор: ' + str(self.meta.mmsi) + '\nКурс: ' + str(self.meta.course) +'\nНазвание: ' +
-                  str(self.meta.shipname)+ '\nПозывной: ' + str(self.meta.callsign) +f'\n <a href="http://127.0.0.1:5000/ship/{self.meta.course}">about</a>',
+                  str(self.meta.shipname)+ '\nПозывной: ' + str(self.meta.callsign) +f'\n <a href="http://127.0.0.1:5000/ship/{self.meta.mmsi}">about</a>',
             tooltip="Подробнее",
             # icon=folium.Icon(icon='arrow-up', color='blue', angle=int(self.ship.course)
             icon=folium.DivIcon(html=f"""<div style="color:#f00;content:url(static/marker.png);width:30px;

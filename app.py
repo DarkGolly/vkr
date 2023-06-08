@@ -44,11 +44,17 @@ def search():
 @app.route("/fast_mmsi", methods=["POST", "GET"])
 def fast_mmsi():
     map = MarkersMaker()
-    if request.method == 'POST':
-        mmsi = request.form['mmsi']
+    try:
+        if request.method == 'POST' and request.form['mmsi'].isdigit():
+            mmsi = request.form['mmsi']
+        elif request.args.get('mmsi').isdigit():
+            mmsi = request.args.get('mmsi')
+    except:
+        mmsi = 0
+    if mmsi==0:
+        map.plotMarkers(None, "off")
     else:
-        mmsi = request.args.get('mmsi')
-    map.plotMarker(mmsi)
+        map.plotMarker(mmsi)
     return render_template("index.html")
 @app.route("/process_data", methods=['POST'])
 def process_data():

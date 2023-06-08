@@ -62,18 +62,34 @@ class DataBase:
         return record
 
     def add_data(self, dict):
-        columns = ', '.join(dict.keys())
+
         query = None
-        if dict['msg_type'] < 5:
+        if dict['msg_type'] < 5 or dict['msg_type'] == 18:
+
+            if dict['msg_type'] == 18:
+                dict.pop('reserved_1')
+                dict.pop('reserved_2')
+                dict.pop('cs')
+                dict.pop('display')
+                dict.pop('dsc')
+                dict.pop('band')
+                dict.pop('msg22')
+                dict.pop('assigned')
+                replacement_dict = {"turn": 'none', "status": 'none',
+                                    "maneuver": 'none',
+                                    "spare_1": 0, }
+                dict.update(replacement_dict)
+                columns = ', '.join(dict.keys())
+            else:
+                replacement_dict = {"turn": repr(dict["turn"]), "status": repr(dict["status"]),
+                                    "maneuver": repr(dict["maneuver"]),
+                                    "spare_1": 0, }
+                dict.update(replacement_dict)
+                columns = ', '.join(dict.keys())
             columns += ", date_rec"
-            replacement_dict = {"turn": repr(dict["turn"]), "status": repr(dict["status"]),
-                                "maneuver": repr(dict["maneuver"]),
-                                "spare_1": 0, }
-            dict.update(replacement_dict)
             result = ', '.join([repr(val) for val in dict.values()]) + ', ' + repr(str(date.today()))
             self.cursor.execute(f"SELECT mmsi FROM ais_ships WHERE mmsi = {dict['mmsi']}")
             existing_object = self.cursor.fetchone()
-            # 'msg_type, repeat, mmsi, status, turn, speed, accuracy, lon, lat, course, heading, second, maneuver, spare_1, raim, radio, date_rec'
             if existing_object:
                 # Объект найден, выполняем обновление
                 self.cursor.execute("UPDATE ais_ships SET msg_type = %s, repeat = %s, status = %s, turn = %s, speed"
@@ -93,6 +109,7 @@ class DataBase:
                                 "epfd": repr(dict["epfd"]),
                                 "spare_1": 0, }
             dict.update(replacement_dict)
+            columns = ', '.join(dict.keys())
             result = ', '.join([repr(val) for val in dict.values()])
             self.cursor.execute(f"SELECT mmsi FROM ais_meta WHERE mmsi = {dict['mmsi']}")
             existing_object = self.cursor.fetchone()
@@ -112,21 +129,29 @@ class DataBase:
         self.connection.commit()
 
     def execute_query_one(self, param):
-        query = f"select * from ais_ships where mmsi = {param};"
-        self.cursor.execute(query)
-        record = self.cursor.fetchall()
-        print("Запрос успешен!")
-        return record
+        if param == 0:
+            return self.execute_query_all()
+        else:
+            query = f"select * from ais_ships where mmsi = {param};"
+            self.cursor.execute(query)
+            record = self.cursor.fetchall()
+            print("Запрос успешен!")
+            return record
 
     def execute_query_on(self, params):
         print(params)
         new = {}
+        record = None
         count = 0
         query = "SELECT * FROM ais_ships "
         for param in params:
             if params[param] != '':
                 new.update({param: params[param]})
-        if count < 5:
+            else:
+                count += 1
+        if count == 5:
+            return self.execute_query_all()
+        else:
             query += "WHERE "
             query += ' AND '.join([f'{condition} = {params[condition]}' for condition in new])
         try:
