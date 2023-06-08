@@ -5,8 +5,6 @@ from pyais import decode, NMEAMessage
 from Ship import Ship
 from db import DataBase
 from marker_maker import MarkersMaker
-import asyncio
-import websockets
 
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
