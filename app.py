@@ -114,7 +114,7 @@ def ais(ws):
         now = datetime.now()
         duration = now - start_time
         duration_ms = duration.microseconds / 1000
-        ws.send(f"{duration_ms:.2f}ms")
+        ws.send(f"{duration_ms:.6f}ms")
         encoding_data(text)
 
 
