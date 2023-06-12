@@ -126,7 +126,7 @@ def handle_post_request():
         duration = now - start_time
         duration_ms = duration.microseconds / 1000
         encoding_data(data)
-        return '*'
+        return 'success', 200
     else:
         return 'Unsupported Media Type', 415
 
