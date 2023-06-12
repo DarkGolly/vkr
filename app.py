@@ -115,7 +115,7 @@ def ais(ws):
         duration = now - start_time
         duration_ms = duration.microseconds / 1000
         encoding_data(data)
-        ws.send('*')
+        ws.send(duration_ms)
 
 @app.route('/post-handler', methods=['POST'])
 def handle_post_request():
