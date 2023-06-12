@@ -108,14 +108,13 @@ def process_data():
 
 @sock.route('/ais')
 def ais(ws):
-    while True:
-        text = ws.receive()
-        start_time = datetime.now()
-        now = datetime.now()
-        duration = now - start_time
-        duration_ms = duration.microseconds / 1000
-        ws.send(f"{duration_ms:.6f}ms")
-        encoding_data(text)
+    text = ws.receive()
+    start_time = datetime.now()
+    now = datetime.now()
+    duration = now - start_time
+    duration_ms = duration.microseconds / 1000
+    ws.send(f"{duration_ms:.6f}ms")
+    encoding_data(text)
 
 @app.route('/post-handler', methods=['POST'])
 def handle_post_request():
