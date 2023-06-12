@@ -117,7 +117,17 @@ def ais(ws):
         ws.send(f"{duration_ms:.6f}ms")
         encoding_data(text)
 
-
+@app.route('/post-handler', methods=['POST'])
+def handle_post_request():
+    if request.content_type == 'text/plain':
+        data = request.get_data(as_text=True)
+        start_time = datetime.now()
+        now = datetime.now()
+        duration = now - start_time
+        duration_ms = duration.microseconds / 1000
+        return f"{duration_ms:.6f}ms"
+    else:
+        return 'Unsupported Media Type', 415
 
 def encoding_data(data):
     splitData = data.split()
