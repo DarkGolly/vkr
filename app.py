@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, url_for,redirect
 from flask_sock import Sock
 from pyais import decode, NMEAMessage
+from datetime import datetime
 
 from Ship import Ship
 from db import DataBase
@@ -49,7 +50,7 @@ def fast_mmsi():
             mmsi = request.args.get('mmsi')
     except:
         mmsi = 0
-    if mmsi==0:
+    if mmsi == 0:
         map.plotMarkers(None, "off")
     else:
         map.plotMarker(mmsi)
@@ -104,12 +105,16 @@ def process_data():
     return render_template('index.html')
 
 
+
 @sock.route('/ais')
 def ais(ws):
     while True:
         text = ws.receive()
-        ws.send("Данные пришли!")
-        #print(text)
+        start_time = datetime.now()
+        now = datetime.now()
+        duration = now - start_time
+        duration_ms = duration.microseconds / 1000
+        ws.send(f"{duration_ms:.2f}ms")
         encoding_data(text)
 
 
@@ -123,14 +128,9 @@ def encoding_data(data):
                 NMEAMessage(str.encode(splitData[1]))
             ]
         ).decode().asdict()
-        print(splitData)
-        print("------")
-        print(as_dict)
+
     else:
         decoded = decode(splitData[0])
         as_dict = decoded.asdict()
-        print(splitData)
-        print("-------")
-        print(as_dict)
     db = DataBase()
     db.add_data(as_dict)
